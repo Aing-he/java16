@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style type="text/css">
+	.highlight{
+		background-color: yellow;
+	}
+
+</style>
+<body>
+	<table border = "1">
+		<thead th:insert="index :: title" align="center"></thead>
+		<tbody align="center">
+			<tr th:each="emp,stat:${list}" th:class="${emp.job == 'MANAGER' || emp.job == 'PRESIDENT'}?'highlight':''">
+				<td >[[${stat.index+1}]]</td>
+				<td th:text="${emp.empno}"></td>
+				<td >[[${#strings.substring(emp.ename,0,3)}]]</td>
+				<td th:text="${emp.job}"></td>
+				<td th:text="${emp.mgr}"></td>
+				<td>[[${#dates.format(emp.hiredate,'yyyy-MM-dd日')}]]</td>
+				<td th:style="${emp.sal>1500}?'color:red'">[[${#numbers.formatCurrency(emp.sal)}]]</td>
+				<td th:text="${emp.comm}!=null?${emp.comm}:'N/A'"></td>
+				<td th:switch="${emp.deptno}">
+					<span th:case="10">财务部</span>
+					<span th:case="20">人事部</span>
+					<span th:case="30">销售部</span>
+					<span th:case="*">其他部门</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

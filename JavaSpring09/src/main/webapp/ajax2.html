@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>异步请求</title>
+    <style type="text/css">
+    	#table1{
+    		border: solid 1px black;
+    	}
+    	tr,td{
+ 			align-text:center;
+    		border: solid 1px black;
+    	}
+    </style>
+    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //ajax异步请求
+            $("#bnt1").click(function(){
+                $.ajax({
+                    url:"/getemps",
+                    type:"post",
+                    async:true ,
+                    success:function(data){
+                        $("#showMessageDiv").empty();//清楚节点
+                        $("#showMessageDiv").append("<table id='table1'></table>");//创建表格
+                        $("#table1").append("<tr><td>empno</td><td>ename</td><td>job</td><td>mgr</td></tr>");//添加子节点
+                        $.each(data,function (i,result) {
+                            var item="<tr><td>"+result.empno+"</td><td>"+result.ename+"</td><td>"+result.job+"</td><td>"+result.mgr+"</td>";
+                            $("#table1").append(item);
+                        });
+                    },
+                    error:function(){alert("请求出错");}
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+	<div>异步请求响应</div>
+	<div id="data">
+		<button id="bnt1">异步请求</button>
+	</div>
+	<div id="showMessageDiv"></div>
+	
+</body>
+</html>
