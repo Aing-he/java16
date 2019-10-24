@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>异步请求</title>
+    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+        	//ajax异步请求
+            $("#bnt1").click(function(){
+               $.ajax({
+            	   url:"/test1",
+            	   type:"post",
+            	   async:true ,
+            	   success:function(data){alert(data)},       
+            	   error:function(){alert("请求出错");} 
+               })
+            })
+            //get异步请求
+            $("#bnt2").click(function(){
+				$.get("/test1",function(data){
+					alert(data)
+				})
+			});
+          //get异步请求
+            $("#bnt3").click(function(){
+				$.post("/test1",function(data){
+					alert(data)
+				})
+			})
+        })
+    </script>
+</head>
+<body>
+    <button id="bnt1">ajax异步请求</button>
+    <button id="bnt2">get异步请求</button>
+    <button id="bnt3">post异步请求</button>
+</body>
+</html>

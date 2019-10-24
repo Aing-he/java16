@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>异步请求</title>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+        $(function(){   
+            $("#btn1").click(function(){
+	           	 $.ajax({            
+	           		url:"/regist",          
+	           		type:"post",     
+	           		data:$("#MyForm").serialize(),    
+	           		async:true,          
+	           		success:function(){ alert("注册成功");},        
+	           		error:function(){ alert("注册失败");}       
+	           	}); 
+         	 });
+        });
+    </script>
+</head>
+<body>
+	<form id="MyForm" method="post">
+		编号：<input id="empno" name="empno" /><br> 
+		用户名：<input id="ename" name="ename" /><br>
+		 岗位：<input id="job" name="job" /><br>
+		领导编号：<input id="mgr" name="mgr" /><br> 
+		工资：<input id="sal" name="sal" /><br>
+		<!-- 日期:<input id="hiredate" name="hiredate"/><br> -->
+		<!-- 奖金：<input id="comm" name="comm"/><br> -->
+		<!-- 部门：<input id="deptno" name="deptno"/><br> -->
+		<input id="btn1" type="button" value="提交" />
+	</form>
+</body>
+</html>
